@@ -1,45 +1,19 @@
 pipeline {
-
 agent any
-
 environment {
-
-APP_SERVER = "APP_SERVER_PRIVATE_IP"
+APP_SERVER = "172.31.23.66"
 }
-
 stages {
-
-stage('Checkout') {
-
+stage('checkout') {
 steps {
-
-git branch: 'main',
-url: 'YOUR_GITHUB_REPO'
+git branch: 'main', url: 'https://github.com/msaditi19994/company-website.git'
 }
-}
-
-stage('Deploy Website') {
-
+stage('deploy website') {
 steps {
-
-sshagent(['app-server-key']) {
-
 sh """
-
-scp \
-index.html \
-ubuntu@$APP_SERVER:/tmp/
-
-ssh \
-ubuntu@$APP_SERVER '
-
-sudo cp /tmp/index.html \
-/var/www/html/index.html
-
-'
-
+scp -o StrictHostKeyChecking=no index.html ec2-user@${APP_SERVER}:/tmp/
+ssh -o StrictHostKeyChecking=no ec2-user@${APP_SERVER} 'sudo cp /tmp/index.html /var/www/html/index.html'
 """
-}
 }
 }
 }
