@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        APP_SERVER = "172.31.23.66"
+        APP_SERVER = "172.31.23.96"
     }
 
     stages {
@@ -16,7 +16,7 @@ pipeline {
         stage('Deploy Website') {
             steps {
                 sh """
-                scp -o StrictHostKeyChecking=no index.html ec2-ubuntu@${@172.31.25.146}:/tmp/
+                scp -o StrictHostKeyChecking=no index.html ec2-ubuntu@${@172.31.23.96}:/tmp/
                 ssh -o StrictHostKeyChecking=no ec2-ubuntu@${@172.31.25.146} 'sudo cp /tmp/index.html /var/www/html/index.html'
                 """
             }
