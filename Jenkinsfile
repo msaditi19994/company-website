@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
     steps {
         git branch: 'main',
-            url: 'https://github.com/msaditi19994/company-web-page-deployment.git
+            url: 'https://github.com/msaditi19994/company-web-page-deployment.git'
     }
 
         stage('Deploy Website') {
