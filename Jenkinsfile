@@ -18,7 +18,7 @@ pipeline {
         
         stage('Deploy to EC2') {
             steps {
-                sshagent(credentials: ['ec2-ssh-key']) {  // 3. Must match Jenkins Credentials ID exactly
+                sshagent(credentials: ['app-server-key']) {  // 3. Must match Jenkins Credentials ID exactly
                     sh """
                         echo "Deploying index.html to ${APP_SERVER}"
                         scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null index.html ${APP_USER}@${APP_SERVER}:/tmp/
