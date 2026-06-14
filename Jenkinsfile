@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        APP_SERVER = "172.31.25.146"
+        APP_SERVER = "100.53.179.5"
         
         APP_USER = "ec2-user"
     }
