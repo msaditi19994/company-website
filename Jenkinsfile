@@ -16,8 +16,8 @@ pipeline {
         stage('Deploy Website') {
             steps {
                 sh """
-                scp -o StrictHostKeyChecking=no index.html ec2-ubuntu@${@172.31.23.96}:/tmp/
-                ssh -o StrictHostKeyChecking=no ec2-ubuntu@${@172.31.25.146} 'sudo cp /tmp/index.html /var/www/html/index.html'
+                scp -o StrictHostKeyChecking=no index.html ec2-ubuntu@172.31.23.96:/tmp/
+                ssh -o StrictHostKeyChecking=no ec2-ubuntu@172.31.25.146 'sudo cp /tmp/index.html /var/www/html/index.html'
                 """
             }
         }
