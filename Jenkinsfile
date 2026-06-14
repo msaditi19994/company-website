@@ -1,43 +1,20 @@
 pipeline {
-
 agent any
-
 environment {
-
-APP_SERVER = "172.31.23.96"
+   APP_SERVER = "172.31.25.146"
 }
-
 stages {
-
-stage('Checkout') {
-
+stage('checkout') {
 steps {
-
-git branch: 'main',
-url: 'YOUR_GITHUB_REPO'
+git branch: 'main', url: 'https://github.com/msaditi19994/company-website.git'
 }
 }
-
-stage('Deploy Website') {
-
+stage('deploy website') {
 steps {
-
-sshagent(['app-server-key']) {
-
+sshagent(credentials: ['app-server-key']) {
 sh """
-
-scp \
-index.html \
-ubuntu@$172.31.23.96:/tmp/
-
-ssh \
-ubuntu@$172.31.23.96'
-
-sudo cp /tmp/index.html \
-/var/www/html/index.html
-
-'
-
+scp -o StrictHostKeyChecking=no index.html ubuntu@${APP_SERVER}:/tmp/
+ssh -o StrictHostKeyChecking=no ubuntu@${APP_SERVER} 'sudo cp /tmp/index.html /var/www/html/index.html'
 """
 }
 }
