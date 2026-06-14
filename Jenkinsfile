@@ -5,7 +5,7 @@ pipeline {
         APP_SERVER = "172.31.23.96"
     }
 
-    stages {
+    stage {
 
         stage('Checkout') {
     steps {
